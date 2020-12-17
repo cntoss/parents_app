@@ -17,7 +17,6 @@ Widget makeScaleTween({Widget child, context, int duration, Cubic curve}) {
 
 Widget makeSlideTween({Widget child, @required context}) {
   return TweenAnimationBuilder(
-
     duration: const Duration(milliseconds: 300),
     child: child,
     curve: Curves.easeInOut,

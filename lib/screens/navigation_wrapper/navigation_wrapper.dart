@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:principle_app/screens/calendar/calander.dart';
 
-
 import 'package:principle_app/screens/homepage/homepage.dart';
 
 import 'package:principle_app/screens/navigation_wrapper/drawer.dart';
@@ -25,18 +24,32 @@ class _HomePageWrapperState extends State<HomePageWrapper>
   Animation<double> scaleReverce;
   Animation<Offset> slide;
   PageController _pageController;
-
+  int currentpage = 0;
+  ValueNotifier<int> op = ValueNotifier<int>(0);
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(keepPage: true);
+    _pageController = PageController(keepPage: true, initialPage: 0)
+      ..addListener(pagePositionListner);
     animController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
     );
     animController.addListener(() {
       isTouchable.value = animController.status != AnimationStatus.completed;
+    });
+    print('pagesss');
+    // print(_pageController.addListener(() { }));
+  }
+
+  pagePositionListner() {
+    op.value != (_pageController.page + .5).toInt()
+        ? op.value = (_pageController.page + 0.5).toInt()
+        : null;
+    print(currentpage);
+    setState(() {
+      currentpage = op.value;
     });
   }
 
@@ -122,17 +135,14 @@ class _HomePageWrapperState extends State<HomePageWrapper>
     return Column(
       children: [
         Expanded(
-          flex: 1,
-          child: PageView(
+            child: PageView(
             physics: NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
               HomePage(),
               NotificationsPage(),
-              CalenderPage(
-
-              ),
-             Profile(),
+              CalenderPage(),
+              Profile(),
             ],
           ),
         )
@@ -152,15 +162,47 @@ class _HomePageWrapperState extends State<HomePageWrapper>
     return AppBar(
       elevation: 0,
       centerTitle: true,
-      /*  title: SizedBox(
-          width: (MediaQuery.of(context).size.width - 50) * .8,
-          child: Text(
-            "Very Long School name School Name",
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: Constants.title.copyWith(letterSpacing: 1, fontSize: 20),
-          )),*/
+      title: currentpage == 0
+          ?  Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 1.0),
+                child: TextField(
+                  autofocus: false,
+                  onChanged: (value) {
+                    //filterContactResults(value);
+                    //filterOrganizationResults(value);
+                  },
+                  //controller: editingController,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(8.0),
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: "Search teacher or student",
+                      //hintText: "Search",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.tealAccent),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(8.0)))),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                bottom: 0,
+                right: 0,
+                child: IconButton(splashColor: Colors.transparent,
+                  icon: Icon(Icons.clear),
+                  color: Colors.grey,
+                  onPressed: () {
+                    setState(() {
+                      //editingController.clear();
+                    });
+                  },),
+              )
+            ],
+          ) 
+          : Container(),
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -181,23 +223,23 @@ class _HomePageWrapperState extends State<HomePageWrapper>
   }
 
   Widget drawer() {
-
     return Material(
       child: SafeArea(
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           child: AnimatedBuilder(
-            builder: (BuildContext context,  Widget child) {
-             return ScaleTransition(
-               scale: scaleReverce,
-               child: child,
-             );
+            builder: (BuildContext context, Widget child) {
+              return ScaleTransition(
+                scale: scaleReverce,
+                child: child,
+              );
             },
             child: Align(
               alignment: Alignment.topLeft,
-              child: AppDrawer(name:schoolName),
-            ),  animation: scale,
+              child: AppDrawer(name: schoolName),
+            ),
+            animation: scale,
           ),
         ),
       ),

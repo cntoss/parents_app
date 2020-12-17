@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class
-Constants {
-  static EdgeInsets padding= EdgeInsets.symmetric(horizontal:8.0);
-  static String appName ="School Gaffer";
-  static String passwordValidationError ="Password must contain at least 6 characters.";
-  static String phoneValidationError ="Phone number must have exactly 10 digits ";
-  static String  defaultloginError =  'Woopsie! Login Failed, please retry in a minute or so.';
+class Constants {
+  static EdgeInsets padding = EdgeInsets.symmetric(horizontal: 8.0);
+  static String appName = "School Gaffer";
+  static String passwordValidationError =
+      "Password must contain at least 6 characters.";
+  static String phoneValidationError =
+      "Phone number must have exactly 10 digits ";
+  static String defaultloginError =
+      'Woopsie! Login Failed, please retry in a minute or so.';
 
-  static TextStyle title =const TextStyle(
+  static TextStyle title = const TextStyle(
       inherit: false,
       color: Color(0x8a000000),
       fontFamily: "Roboto",
       fontSize: 28.0,
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.none);
-  static TextStyle titleWhite =const TextStyle(
+  static TextStyle titleWhite = const TextStyle(
       inherit: false,
       color: Colors.white,
       fontFamily: "Roboto",
@@ -24,16 +26,17 @@ Constants {
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.none);
 
+ 
   static Color lightPrimary = Color(0xffffffff);
   //static Color lightPrimary = Colors.red;
   static Color darkPrimary = Colors.black;
-  static   List<Color> get tileGradient => [lightAccent,lightAccentComplimentary];
+  static List<Color> get tileGradient =>
+      [lightAccent, lightAccentComplimentary];
   static Color lightAccent = Color(0xff35f481);
   static Color lightAccentComplimentary = Color(0xff14c9ca);
   static Color darkAccent = Color(0xff11998e);
   static Color lightBG = Color(0xffffffff);
   static Color darkBG = Colors.black;
-
 
   static ThemeData lightTheme = ThemeData(
     fontFamily: GoogleFonts.roboto().fontFamily,
@@ -58,7 +61,6 @@ Constants {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-
     fontFamily: GoogleFonts.roboto().fontFamily,
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
@@ -92,7 +94,8 @@ Constants {
     "10": "Oct",
     "11": "Nov",
     "12": "Dec",
-  };static var monthsNep = {
+  };
+  static var monthsNep = {
     "1": "Baishakh",
     "2": "Jestha",
     "3": "Ashadh",
@@ -114,6 +117,5 @@ Constants {
     "5": "Thursday",
     "6": "Friday",
     "7": "Saturday",
-
   };
 }
