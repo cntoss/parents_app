@@ -3,6 +3,7 @@ import 'package:principle_app/screens/internal_pages/articles/articles.dart';
 import 'package:principle_app/screens/internal_pages/bus_details/bus_details.dart';
 import 'package:principle_app/screens/internal_pages/due_details/due_details.dart';
 import 'package:principle_app/screens/internal_pages/events/events.dart';
+import 'package:principle_app/screens/internal_pages/teacher/teacher_list.dart';
 
 import 'package:principle_app/screens/library/library.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
             Events.tag: (context) => Events(),
             DueDetails.tag: (context) => DueDetails(),
             BusDetails.tag: (context) => BusDetails(),
+            Teacher.tag: (context) => Teacher(),
           },
         );
       },

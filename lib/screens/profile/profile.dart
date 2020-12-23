@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:principle_app/screens/homepage/dog_tag_widget.dart';
@@ -25,7 +24,7 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
         Stack(children: [
           Opacity(
             opacity: 0.7,
-                      child: Container(
+            child: Container(
               child: Image.asset(
                 "assets/gys.jpg",
                 fit: BoxFit.fill,
@@ -61,11 +60,14 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
         ]),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'School Details',
-           style: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w100,)
-            // style:   Theme.of(context).tabBarTheme.labelStyle   
-          ),
+          child: Text('School Details',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w100,
+              )
+              // style:   Theme.of(context).tabBarTheme.labelStyle
+              ),
         ),
         Expanded(flex: 1, child: buildDetails(context))
       ],
@@ -77,14 +79,11 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
       "School's Name": "shree janata purbanchan madyamic bidwalaye",
       "Adress": "Mid-Baneshwor , Katmandu",
       "Email ": "info@janata.com.np",
-      "Local Gudardian's Name": "Bivek  KC",
     };
     var contacts = {
       "Phone": "9829326666",
     };
-    var website ={
-      "Website": "https://flutter.dev"
-    };
+    var website = {"Website": "https://flutter.dev"};
     return ListView(
       children: [
         ...attributes.keys.map((e) => Padding(
@@ -155,7 +154,7 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
                 ),
               ),
             )),
-              ...website.keys.map((e) => Padding(
+        ...website.keys.map((e) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () async {
@@ -198,7 +197,7 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
                 ),
               ),
             )),
-            ],
+      ],
     );
   }
 
@@ -211,4 +210,3 @@ class _ProfileState extends State<Profile> with AutomaticKeepAliveClientMixin {
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
-

@@ -1,30 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:principle_app/models/student.dart';
-import 'package:principle_app/screens/homepage/dog_tag_widget.dart';
-import 'package:principle_app/screens/internal_pages/student/custom_dog.dart';
 import 'package:principle_app/simple_utils/ui_modifiers.dart';
-import 'package:principle_app/simple_utils/widgets.dart';
 import 'package:principle_app/template.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:principle_app/screens/internal_pages/student/custom_dog.dart';
 
 import 'package:principle_app/const.dart';
 
-class StudentDetails extends StatefulWidget {
-  final student;
-  StudentDetails({Key key, this.student}) : super(key: key);
+class TeacherDetails extends StatefulWidget {
+  final teacher;
+  TeacherDetails({Key key, this.teacher}) : super(key: key);
   @override
-  _StudentDetailsState createState() => _StudentDetailsState();
+  _TeacherDetailsState createState() => _TeacherDetailsState();
 }
 
-class _StudentDetailsState extends State<StudentDetails>
+class _TeacherDetailsState extends State<TeacherDetails>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
         body: DefaultTabController(
-      length: 4,
+      length: 2,
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -57,16 +54,10 @@ class _StudentDetailsState extends State<StudentDetails>
                     TabBar(
                       tabs: [
                         Tab(
-                          child: Text("Overview"),
+                          child: Text("Personal Details"),
                         ),
                         Tab(
-                          child: Text("Details"),
-                        ),
-                        Tab(
-                          child: Text('Due Details'),
-                        ),
-                        Tab(
-                          child: Text('Others'),
+                          child: Text("Managerial Details"),
                         )
                       ],
                     ),
@@ -86,11 +77,8 @@ class _StudentDetailsState extends State<StudentDetails>
                         height: height(context),
                         child: TabBarView(
                           children: [
-                            buildListView(context),
                             buildDetails(context),
                             Container(),
-                            Container()
-                            //  buildFindChild(context),
                           ],
                         ),
                       );
@@ -113,7 +101,7 @@ class _StudentDetailsState extends State<StudentDetails>
       "Current Adress": "Mid-Baneshwor , Katmandu",
     };
     var contacts = {
-      "Student's Contact": "9824525245",
+      "teacher's Contact": "9824525245",
       "Gudardian's Contact\nRam kumar mishra": "9862145555",
     };
     return ListView(
@@ -190,140 +178,6 @@ class _StudentDetailsState extends State<StudentDetails>
     );
   }
 
-  ListView buildListView(BuildContext context) {
-    return ListView(
-      children: [
-        findChild(0, context),
-        SizedBox(
-          height: 18,
-        ),
-        findChild(2, context),
-        findChild(-1, context),
-      ],
-    );
-  }
-
-  findChild(final int index, context) {
-    Widget child;
-    switch (index) {
-      case 0:
-        child = Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            statsInChart(context,
-                title: "Attendance", score: 37.58 / 100, data: "32/75"),
-            statsInChart(context,
-                score: 85.66 / 100, title: "Performance", data: "A+"),
-          ],
-        );
-        break;
-      case 1:
-        child = Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 115,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Participations',
-                  style: Constants.title.copyWith(fontSize: 24),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 80,
-                  child: ListView.builder(
-                    itemCount: 6,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          children: [
-                            Chip(
-                              backgroundColor: (index == 1)
-                                  ? Colors.brown[200]
-                                  : (index == 2)
-                                      ? Colors.yellow[200]
-                                      : (index == 3)
-                                          ? Colors.black12
-                                          : Constants.tilesColor,
-                              label: Text("This and that compidition  $index"),
-                            ),
-                            Text("Lead singer")
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-        break;
-      case 2:
-        child = Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Teacher's remarks",
-                  style: Constants.title.copyWith(fontSize: 24),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Column(
-                  children: [
-                    ...[1, 2, 3]
-                        .map((e) => null)
-                        .map((e) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: remarks(),
-                            ))
-                        .toList()
-                  ],
-                )
-                //remarks()
-              ],
-            ),
-          ),
-        );
-        break;
-      default:
-        child = SizedBox(
-          height: 66,
-        );
-    }
-    return child;
-  }
-
-  Column remarks() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Kabita Neupane",
-          style: Constants.title
-              .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          "-Class teacher",
-          style: Constants.title
-              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        Text("noun. an act or instance of participating. "
-            "the fact of taking part, as in some action or "
-            "attempt: participation in a celebration. a sharing, as in benefits or profits: ")
-      ],
-    );
-  }
-
   height(context) {
     var mq = MediaQuery.of(context);
     return mq.size.height - mq.padding.top - 60 - 55 - 205;
@@ -333,5 +187,3 @@ class _StudentDetailsState extends State<StudentDetails>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
-
-var overviewPies = {"Attendance"};

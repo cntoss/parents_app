@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:principle_app/const.dart';
+import 'package:schoolapp/const.dart';
+
 
 class StudentDogTag extends StatelessWidget {
   const StudentDogTag({
@@ -14,9 +15,11 @@ class StudentDogTag extends StatelessWidget {
   final bool mini;
   final String image;
   final Map<String, String> attributes;
-  final normalHeight = 95.0;
-  final smallHeight = 50.0;
+  final normalHeight = 135.0;
+  final smallHeight = 70.0;
+
   double get height => mini ? smallHeight : normalHeight;
+
   @override
   Widget build(BuildContext context) {
     var widthOfImageHolder =
@@ -34,7 +37,6 @@ class StudentDogTag extends StatelessWidget {
             ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
         child: Row(
           children: [
-           
             Container(
               decoration: BoxDecoration(
                 color: Colors.white38,
@@ -45,33 +47,31 @@ class StudentDogTag extends StatelessWidget {
               alignment: Alignment.center,
               width: widthOfImageHolder,
               height: height,
-              child: mini
-                  ? CircleAvatar(
-                      backgroundImage: AssetImage(
+              child: mini ? CircleAvatar(backgroundImage: AssetImage(
+                image,
+
+
+              ), radius: 30,) :
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Material(
+                  elevation: 1,
+                  color: Constants.lightAccent.withOpacity(.3),
+                  borderRadius: BorderRadius.circular(widthOfImageHolder),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(widthOfImageHolder),
+                    child: SizedBox(
+                      width: 120 - 16.0,
+                      height: 120 - 16.0,
+                      child: Image.asset(
                         image,
-                      ),
-                      radius: 30,
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Material(
-                        elevation: 1,
-                        color: Constants.lightAccent.withOpacity(.3),
-                        borderRadius: BorderRadius.circular(widthOfImageHolder),
-                        child: ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(widthOfImageHolder),
-                          child: SizedBox(
-                            width: 120 - 16.0,
-                            height: 120 - 16.0,
-                            child: Image.asset(
-                              image,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                        ),
+                        fit: BoxFit.fitHeight,
+
                       ),
                     ),
+                  ),
+                ),
+              ),
             ),
             Expanded(
               flex: 1,
@@ -95,32 +95,34 @@ class StudentDogTag extends StatelessWidget {
                         ),
                       ),
                     ),
+
+
                     ...attributes.keys
-                        .map((e) => Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      e,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 14,
+                        .map((e) =>
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  e,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 14,
                                           color: Colors.white,
                                           letterSpacing: 1),
                                     )),
-                                Expanded(
-                                    flex: 2,
-                                    child: Text(attributes[e],
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14,
-                                            letterSpacing: 1))),
-                              ],
-                            ))
-                        .toList()
-                        .take(mini ? 2 : attributes.length)
+                            Expanded(
+                                flex: 2,
+                                child: Text(attributes[e],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                        letterSpacing: 1))),
+                          ],
+                        ))
+                        .toList().take(mini ? 2 : attributes.length)
                   ],
                 ),
               ),

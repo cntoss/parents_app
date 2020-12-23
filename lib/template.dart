@@ -3,6 +3,7 @@ import 'package:principle_app/screens/internal_pages/student/class_list.dart';
 import 'package:principle_app/screens/internal_pages/class_routine/class_routine.dart';
 import 'package:principle_app/screens/internal_pages/exam_routine/exam_routine.dart';
 import 'package:principle_app/screens/internal_pages/results/exam_results.dart';
+import 'package:principle_app/screens/internal_pages/teacher/teacher_list.dart';
 
 import 'const.dart';
 
@@ -12,13 +13,14 @@ const studentName = "Thomas Shelby";
 const studentImage = "assets/user.png";
 const schoolLogo = "assets/dofo.png";
 const studentDogTagAttributes = {
-  "DOB": "Jan 27, 2008",
+// "DOB": "Jan 27, 2008",
   "Class": "SIxteen",
   "Section": "Stone Cold",
   "Rank": "12",
 };
 const tiles = {
   "Student": Student.tag,
+  "Teacher": Teacher.tag,
   "Class Routine": ClassRoutine.tag,
   "Exam Routine": ExamRoutine.tag,
   "Results": ExamResults.tag,
